@@ -58,11 +58,6 @@
                     <img src="{% static 'images/logo-bg.png' %}" alt="Click Check Chat Buy" id="qlogo" style="width: 275px; height: 30px;"/>
                 </a>
 
-                <div class="d-flex">
-                    <input type="text" class="form-control" id="searchInput" placeholder="" />
-                </div>
-                
-
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -82,7 +77,58 @@
                     </a>
                 </div>
 
-                
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Search Items....."
+                id="searchInput" <!-- Add an ID for easy selection -->
+                <!-- Set the desired width -->
+            />
+            
+            <!-- Add a button for triggering the search -->
+            <button type="button" onclick="performSearch()" class="btn btn-primary">Search</button>
+            
+            <!-- Add a container to display search results -->
+            <div id="searchResults"></div>
+            
+            <script>
+                $(document).ready(function () {
+                    var placeholderText = "Search Items.....";
+                    var currentCharacter = 0;
+            
+                    function typePlaceholder() {
+                        var currentText = placeholderText.substring(0, currentCharacter + 1);
+                        $("#searchInput").attr("placeholder", currentText);
+                        currentCharacter++;
+            
+                        if (currentCharacter < placeholderText.length) {
+                            setTimeout(typePlaceholder, 150);
+                        }
+                    }
+            
+                    // This will trigger the typing animation when the document is ready
+                    typePlaceholder();
+                });
+            
+                // Function to perform the search
+                function performSearch() {
+                    var searchQuery = $("#searchInput").val();
+            
+                    // AJAX request to Django API endpoint
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/search/", // Replace with your Django API endpoint URL
+                        data: { query: searchQuery },
+                        success: function (data) {
+                            // Display the search results in the searchResults div
+                            $("#searchResults").html(data);
+                        },
+                        error: function (error) {
+                            console.error("Error during search:", error);
+                        }
+                    });
+                }
+            </script>
                 <script>
                     $(document).ready(function () {
                         var placeholderText = "Search Items.....";
