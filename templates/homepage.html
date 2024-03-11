@@ -77,17 +77,24 @@
                     </a>
                 </div>
 
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Search Items....."
-                id="searchInput" <!-- Add an ID for easy selection -->
-                <!-- Set the desired width -->
-            />
-            
-            <!-- Add a button for triggering the search -->
-            <button type="button" onclick="performSearch()" class="btn btn-primary">Search</button>
-            
+                      <!-- Add a new row for the search bar and button -->
+        <div class="input-group">
+            <div class="col-md-6">
+                <div class="search-container" style="margin-left: 15px; margin-right: 15px;">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search Items....."
+                        id="searchInput"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button type="button" onclick="performSearch()" class="btn btn-primary ms-2">Search</button>
+            </div>
+        </div>
+
+
             <!-- Add a container to display search results -->
             <div id="searchResults"></div>
             
