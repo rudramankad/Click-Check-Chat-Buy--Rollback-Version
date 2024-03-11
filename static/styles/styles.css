@@ -200,8 +200,11 @@ nav.navbar-bottom.fixed {
   width: 25%;
 }
 
-.d-flex
+#d-flex
 {
-  width: 300px;
-  margin: 0 auto;
+  width: max-content;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  background-color: white;
 }
