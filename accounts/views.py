@@ -15,6 +15,8 @@ def QuestLogin(request):
             return redirect('index:index')
         else:
             messages.error(request, 'Invalid username or password.')
+            return redirect('accounts:QuestLogin')
+        
     else:
         return render(request, 'QuestLogin.html')
 
@@ -42,7 +44,8 @@ def forgotpassword(request):
         messages.success(request, 'An email has been sent to reset your password.')
         return redirect('accounts:QuestLogin')
     else:
-        return render(request, 'accounts/forgotpassword.html')
+        messages.success(request, 'An email has been sent to reset your password.')
+        return render(request, 'forgotpassword.html')
 
 def user_logout(request):
     logout(request)
