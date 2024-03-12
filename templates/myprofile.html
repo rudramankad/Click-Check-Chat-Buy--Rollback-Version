@@ -49,10 +49,10 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg fixed-top d-flex justify-content-between">
+  <nav class="navbar navbar-expand-lg fixed-top d-flex justify-content-between" style="background: linear-gradient(45deg, #556B2F, #8FBC8F);">
     <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'index:index' %}">
-            <img src="{% static 'images/logo2.png' %}" alt="QuestMart" id="qlogo"/>
+            <img src="{% static 'images/logo-bg.png' %}" alt="Click Check Chat Buy" id="qlogo" style="width: 275px; height: 30px;"/>
         </a>
         <button
             class="navbar-toggler"
@@ -70,6 +70,84 @@
                 <i class="bi bi-list"></i>
             </a>
             
+        </div>
+        <div class="input-group">
+            <div class="col-md-6">
+                <div class="search-container" style="margin-left: 15px; margin-right: 15px;">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Search Items....."
+                        id="searchInput"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button type="button" onclick="performSearch()" class="btn btn-primary ms-2">Search</button>
+            </div>
+        </div>  
+
+        <!-- Add a container to display search results -->
+        <div id="searchResults"></div>
+            
+        <script>
+            $(document).ready(function () {
+                var placeholderText = "Search Items.....";
+                var currentCharacter = 0;
+        
+                function typePlaceholder() {
+                    var currentText = placeholderText.substring(0, currentCharacter + 1);
+                    $("#searchInput").attr("placeholder", currentText);
+                    currentCharacter++;
+        
+                    if (currentCharacter < placeholderText.length) {
+                        setTimeout(typePlaceholder, 150);
+                    }
+                }
+        
+                // This will trigger the typing animation when the document is ready
+                typePlaceholder();
+            });
+        
+            // Function to perform the search
+            function performSearch() {
+                var searchQuery = $("#searchInput").val();
+        
+                // AJAX request to Django API endpoint
+                $.ajax({
+                    type: "GET",
+                    url: "/api/search/", // Replace with your Django API endpoint URL
+                    data: { query: searchQuery },
+                    success: function (data) {
+                        // Display the search results in the searchResults div
+                        $("#searchResults").html(data);
+                    },
+                    error: function (error) {
+                        console.error("Error during search:", error);
+                    }
+                });
+            }
+        </script>
+            <script>
+                $(document).ready(function () {
+                    var placeholderText = "Search Items.....";
+                    var currentCharacter = 0;
+            
+                    function typePlaceholder() {
+                        var currentText = placeholderText.substring(0, currentCharacter + 1);
+                        $("#searchInput").attr("placeholder", currentText);
+                        currentCharacter++;
+            
+                        if (currentCharacter < placeholderText.length) {
+                            setTimeout(typePlaceholder, 150); // This will adjust the speed (in milliseconds)
+                        }
+                    }
+            
+                    // This will trigger the typing animation when the document is ready
+                    typePlaceholder();
+                });
+            </script>
+
         </div>
     </div>
 </nav>
@@ -188,8 +266,8 @@
                                           <h5 class="card-title">{{ item.name }}</h5>
                                           <p class="card-text">{{ item.description }}</p>
                                           <p class="card-text"><strong>Price: ${{ item.price }}</strong></p>
-                                          <button type="button" class="btn btn-primary">Buy Now</button>
-                                      </div>
+                                          <button type="button" class="btn btn-primary" style="background-color: #28a745; border-color: #28a745;">Edit Item</button>
+                                          <button type="button" class="btn btn-primary" style="background-color: darkred; border-color: darkred;">Delete item</button>                                      </div>
                                   </div>
                               </div>
                           {% endfor %}
@@ -204,7 +282,7 @@
 
   <nav class="navbar fixed-bottom navbar-light bg-light navbar-bottom">
     <div class="container-fluid">
-        <p>&copy; 2023 QuestMart. All rights reserved.</p>
+        <p>&copy; 2024 Click Check Chat Buy.</p>
     </div>
 </nav>
 </body>
