@@ -32,7 +32,7 @@ urlpatterns = [
     path('', include('index.urls')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('contact/', include('contact.urls')),
-    path('requests/', include('userrequests.urls'))
+    path('requests/', include('userrequests.urls')),
 ]
 
 # Static URL patterns

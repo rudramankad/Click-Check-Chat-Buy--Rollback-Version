@@ -14,6 +14,10 @@ def buypage(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     return render(request, 'buypage.html', {'item': item})
 
+def elcetronic(request):
+    items = Item.objects.all()
+    return render(request, 'electronic.html', {'items': items})
+
 def aboutus(request):
     return render(request, 'aboutus.html')
 
